@@ -756,71 +756,29 @@ export class Impresora {
   async mostrarVisor(data) {
     let eur = 'E';
 
-    let limitNombre = 0;
-    let lengthTotal = '';
-    let datosExtra = '';
-    if (data.total !== undefined) {
-      lengthTotal = (data.total).toString();
-      if (lengthTotal.length == 1) limitNombre = 17;
-      else if (lengthTotal.length == 2) limitNombre = 16;
-      else if (lengthTotal.length == 3) limitNombre = 15;
-      else if (lengthTotal.length == 4) limitNombre = 14;
-      else if (lengthTotal.length == 5) limitNombre = 13;
-      else if (lengthTotal.length == 6) limitNombre = 12;
-      else if (lengthTotal.length == 7) limitNombre = 11;
+    let t1=data.numProductos+" articles";
+    t1+="                   ";
 
-      const dependienta = data.dependienta.substring(0, limitNombre);
-      const total = data.total + eur;
-      const espacio= ' ';
-      const size = 20-(dependienta.length + total.length);
-      const espacios = ['', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         ', '          ', '           ', '            ', '             ', '              '];
-      datosExtra = dependienta +espacios[size] + total;
-    }
-    if (datosExtra.length <= 2) {
-      datosExtra = '';
-      eur = '';
-    }
-    // Limito el texto a 14, ya que la línea completa tiene 20 espacios. (1-14 -> artículo, 15 -> espacio en blanco, 16-20 -> precio)
-    data.texto = data.texto.substring(0, 14);
-    data.texto += ' ' + data.precio + eur;
-//    try {
-//      permisosImpresora();
-      //   var device = new escpos.USB('0x67b','0x2303');
-//      const device = await dispositivos.getDeviceVisor();
-//      if (device != null) {
-//        if(device === 'MQTT'){
-          let string = `${datosExtra} ${data.texto}                                               `
-          string = string + '                                             '
-          console.log('Mqtt sended' + string + '.')
-          client.publish('hit.hardware/visor',string.substring(0,40))
-//          return
-//        }
-//        const options = {encoding: 'iso88591'};
-//        const printer = new escpos.Screen(device, options);
-//        try {
-//          device.open(function() {
-//            printer
-            // Espacios en blanco para limpiar el visor y volver a mostrar los datos en el sitio correcto
-            // .text("")
-//                .clear()
-            // .moveUp()
-            // Información del artículo (artículo + precio)
-//                .text(datosExtra )
-//                .text(data.texto)
-            // .text(datosExtra)
-//                .close();
-//          });
-//        } catch (error) {
-//
-//        }
-//      } else {
-//          mqttlog.loggerMQTT('Controlado: dispositivo es null');
-//      }
-//    } catch (err) {
-//        mqttlog.loggerMQTT('Error2: '+ err);
-      // errorImpresora(err, event);
-//    }
-    //   mqttlog.loggerMQTT('El visor da muchos problemas');
+    let t2;
+    t2=" "+ data.total + eur;
+
+    let linea1;
+    linea1=t1.substring(0,20-t2.length)+t2;
+    
+
+    let t3=data.texto;
+    t3+="                    ";
+
+    let t4=" "+data.precio+eur;
+
+    let linea2;
+    linea2=t3.substring(0,20-t4.length)+t4;
+    
+
+    let nuevoString=linea1+linea2;
+    console.log("nuevoString: "+nuevoString);
+    client.publish('hit.hardware/visor',nuevoString);
+
   }
   async imprimirEntregas() {
     const params = parametrosInstance.getParametros();

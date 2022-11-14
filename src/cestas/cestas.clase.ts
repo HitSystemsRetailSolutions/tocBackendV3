@@ -357,12 +357,20 @@ export class CestaClase {
         if (cestaRetornar != undefined && cestaRetornar != null) {
           if (cestaRetornar.tiposIva != undefined && cestaRetornar.tiposIva != null) {
             trabajadoresInstance.getCurrentTrabajador().then((data) => {
+              // contando el total de unidades de cada producto
+              let numProductos=0;
+              for (let i = 0; i < cestaRetornar.lista.length; i++) {
+                numProductos += cestaRetornar.lista[i].unidades;
+                
+                
+              }
               try {
                 impresoraInstance.mostrarVisor({
                   dependienta: data.nombre,
                   total: (cestaRetornar.tiposIva.importe1 + cestaRetornar.tiposIva.importe2 + cestaRetornar.tiposIva.importe3).toFixed(2),
                   precio: infoArticulo.precioConIva.toString(),
                   texto: infoArticulo.nombre,
+                  numProductos:numProductos,
                 });
               } catch (err) {
                 mqtt.loggerMQTT(err);
@@ -419,12 +427,19 @@ export class CestaClase {
           cesta.tiposIva = construirObjetoIvas(infoArticulo, cesta.lista[i].unidades, cesta.tiposIva);
         }
         trabajadoresInstance.getCurrentTrabajador().then((data) => {
+          let numProductos=0;
+              for (let i = 0; i < cesta.lista.length; i++) {
+                numProductos += cesta.lista[i].unidades;
+                
+                
+              }
           try {
             impresoraInstance.mostrarVisor({
               dependienta: data.nombre,
               total: (cesta.tiposIva.importe1 + cesta.tiposIva.importe2 + cesta.tiposIva.importe3).toFixed(2),
               precio: infoArticulo.precioConIva.toString(),
               texto: infoArticulo.nombre,
+              numProductos: numProductos,
             });
           } catch (err) {
             mqtt.loggerMQTT(err);
