@@ -12,7 +12,7 @@ export class Dispositivos {
   async getDevice() {
     // const device = new escpos.Screen(); --Mirarse screen
     const device = new escpos.Network('localhost');
-    console.log(device)
+   
     return device;
 
 

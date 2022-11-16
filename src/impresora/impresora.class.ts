@@ -444,13 +444,13 @@ export class Impresora {
       // const networkScreen = new escpos.Screen(device);
 //      const device = await escpos.Network('localhost');
 
-console.log('1')        
+      
       const options = {encoding: 'GB18030'};
-      console.log('2')        
+     
       const printer = new escpos.Printer(device, options);
-      console.log('3')        
+       
       device.open(function() {
-console.log('4')        
+     
         printer
             .setCharacterCodeTable(19)
             .encode('CP858')
@@ -477,8 +477,7 @@ console.log('4')
             .close();
       });
       // muestra la data
-      console.log(printer);
-      console.log('5',printer.buffer.buffer);        
+      // console.log('5',printer.buffer.buffer);        
       client.publish('hit.hardware/impresora',printer.buffer.buffer);
 
     } catch (err) {
