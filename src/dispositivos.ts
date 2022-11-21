@@ -10,6 +10,13 @@ escpos.Screen = require('escpos-screen');
 
 export class Dispositivos {
   async getDevice() {
+    // const device = new escpos.Screen(); --Mirarse screen
+    const device = new escpos.Network('localhost');
+   
+    return device;
+
+
+
     const parametros = await parametrosInstance.getEspecialParametros();
     if (os.platform() === 'linux') {
       try {

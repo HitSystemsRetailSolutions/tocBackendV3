@@ -16,6 +16,7 @@ const dispositivos = new Dispositivos();
 const escpos = require('escpos');
 const exec = require('child_process').exec;
 const os = require('os');
+escpos.Network = require('escpos-network');
 escpos.USB = require('escpos-usb');
 escpos.Serial = require('escpos-serialport');
 escpos.Screen = require('escpos-screen');
@@ -98,6 +99,7 @@ export class Impresora {
             // .text(datosExtra)
 
                 .close();
+                client.publish('hit.hardware/impresora',printer.buffer.buffer);
           });
         } catch (error) {
 
@@ -438,10 +440,18 @@ export class Impresora {
       //     });
       // }
       const device = await dispositivos.getDevice();
+      
+      // networkScreen util/necesario?
+      // const networkScreen = new escpos.Screen(device);
+//      const device = await escpos.Network('localhost');
 
+      
       const options = {encoding: 'GB18030'};
+     
       const printer = new escpos.Printer(device, options);
+       
       device.open(function() {
+     
         printer
             .setCharacterCodeTable(19)
             .encode('CP858')
@@ -466,7 +476,12 @@ export class Impresora {
             .text('')
             .cut()
             .close();
+            client.publish('hit.hardware/impresora',printer.buffer.buffer);
       });
+      // muestra la data
+      // console.log('5',printer.buffer.buffer);        
+      
+
     } catch (err) {
         mqttlog.loggerMQTT(err);
     }
