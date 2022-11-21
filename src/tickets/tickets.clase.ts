@@ -87,7 +87,7 @@ export class TicketsClase {
   }
 
   getTicketAnulado = async (idTicket: number) => await schTickets.getTicketAnulado(idTicket);
-
+  // getUltimoTicketError
   getUltimoTicket() {
     return parametrosInstance
       .getEspecialParametros()
@@ -106,13 +106,7 @@ export class TicketsClase {
 
   async insertarTicket(ticket: TicketsInterface): Promise<boolean> {
     try {
-      console.log("ins tick...");
-      console.log(ticket.lista);
-      console.log(parametrosInstance.getParametros());
-      console.log("...ins ticket");
-      console.log(" ticket mongo...");
-      console.log(schTickets.getUltimoTicket());
-      console.log("...ticket mongo")
+      
       if (ticket.lista.length == 0) {
         throw Error("La cesta no puede estar vacía");
       }
@@ -189,6 +183,11 @@ export class TicketsClase {
           : false,
       bloqueado: false,
     };
+
+
+    // Coge el ultimo ticket del tocGame
+    objTicket._id = (await schTickets.getUltimoTicket()) + 1;
+    
 
     if (await this.insertarTicket(objTicket)) {
       if (await cestas.borrarCesta(idCesta)) {

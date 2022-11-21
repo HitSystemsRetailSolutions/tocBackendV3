@@ -136,7 +136,7 @@ export async function getUltimoTicket(): Promise<number> {
   ).toArray();
   if (resultado.length > 0) {
     if (resultado[0]._id != undefined) {
-      console.log("getUlm id ticket:",resultado[0]._id);
+      
       return resultado[0]._id; // Último ID ticket
 
     } else {
@@ -163,7 +163,6 @@ export async function nuevoTicket(ticket: TicketsInterface): Promise<boolean> {
   try {
     const database = (await conexion).db("tocgame");
     const tickets = database.collection<TicketsInterface>("tickets");
-    console.log("const tickets: ",tickets);
     
     return (await tickets.insertOne(ticket)).acknowledged;
   } catch (err) {
