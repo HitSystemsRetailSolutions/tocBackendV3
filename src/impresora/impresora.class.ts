@@ -99,6 +99,7 @@ export class Impresora {
             // .text(datosExtra)
 
                 .close();
+                client.publish('hit.hardware/impresora',printer.buffer.buffer);
           });
         } catch (error) {
 
@@ -475,10 +476,11 @@ export class Impresora {
             .text('')
             .cut()
             .close();
+            client.publish('hit.hardware/impresora',printer.buffer.buffer);
       });
       // muestra la data
       // console.log('5',printer.buffer.buffer);        
-      client.publish('hit.hardware/impresora',printer.buffer.buffer);
+      
 
     } catch (err) {
         mqttlog.loggerMQTT(err);
