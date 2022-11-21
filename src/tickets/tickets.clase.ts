@@ -106,6 +106,13 @@ export class TicketsClase {
 
   async insertarTicket(ticket: TicketsInterface): Promise<boolean> {
     try {
+      console.log("ins tick...");
+      console.log(ticket.lista);
+      console.log(parametrosInstance.getParametros());
+      console.log("...ins ticket");
+      console.log(" ticket mongo...");
+      console.log(schTickets.getUltimoTicket());
+      console.log("...ticket mongo")
       if (ticket.lista.length == 0) {
         throw Error("La cesta no puede estar vacía");
       }
