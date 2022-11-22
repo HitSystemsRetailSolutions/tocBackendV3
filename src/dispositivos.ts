@@ -8,6 +8,7 @@ escpos.USB = require('escpos-usb');
 escpos.Serial = require('escpos-serialport');
 escpos.Screen = require('escpos-screen');
 
+
 export class Dispositivos {
   async getDevice() {
     const parametros = await parametrosInstance.getEspecialParametros();
