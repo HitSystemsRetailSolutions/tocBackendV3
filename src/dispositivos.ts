@@ -68,8 +68,8 @@ export class Dispositivos {
   async getDeviceVisor() {
     const parametros = await parametrosInstance.getEspecialParametros();
     if (parametros.visor != undefined) {
-      if(parametros.visor == 'mqtt'){
-        return 'mqtt'
+      if(parametros.visor == 'MQTT'){
+        return 'MQTT'
       }
       if (parametros.visor.includes('COM') || parametros.visor == 'SI') {
         if (os.platform() === 'win32') {
