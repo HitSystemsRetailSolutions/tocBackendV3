@@ -294,12 +294,13 @@ export class CestaClase {
               miCesta.lista[i].unidades += unidades;
               miCesta.lista[i].subtotal += unidades*infoArticulo.precioConIva;
               miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, viejoIva);
+              encontrado = true;
             } else {
               miCesta.lista[i].subtotal += infoAPeso.precioAplicado;
               miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, viejoIva, infoAPeso);
             }
 
-            encontrado = true;
+           
             break;
           }
         }

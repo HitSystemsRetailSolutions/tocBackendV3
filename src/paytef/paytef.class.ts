@@ -200,6 +200,8 @@ class PaytefClass {
             error: false,
           });
         } else {
+
+//  DavidAguilar   modulo en front archivo socket c  consultaPaytef        
           throw Error("Operación denegada por PayTef");
         }
       } else {
