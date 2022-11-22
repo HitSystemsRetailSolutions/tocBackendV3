@@ -114,7 +114,7 @@ export class Impresora {
     try {
       permisosImpresora();
       //   var device = new escpos.USB('0x67b','0x2303');
-      const device = await dispositivos.getDeviceVisor();
+      const device = await dispositivos.();
       if (device != null) {
 
         if(device === 'MQTT'){
@@ -783,45 +783,42 @@ export class Impresora {
     // Limito el texto a 14, ya que la línea completa tiene 20 espacios. (1-14 -> artículo, 15 -> espacio en blanco, 16-20 -> precio)
     data.texto = data.texto.substring(0, 14);
     data.texto += ' ' + data.precio + eur;
-//    try {
-//      permisosImpresora();
-      //   var device = new escpos.USB('0x67b','0x2303');
-//      const device = await dispositivos.getDeviceVisor();
-//      if (device != null) {
-//        if(device === 'MQTT'){
-          let string = `${datosExtra} ${data.texto}                                               `
-          string = string + '                                             '
+    let string = `${datosExtra} ${data.texto}                                               `
+    string = string + '                                             '
+
+    try {
+      permisosImpresora();
+      const device = await dispositivos.getDeviceVisor();
+      if (device != null) {
+        if(device === 'MQTT'){
           console.log('Mqtt sended' + string + '.')
           client.publish('hit.hardware/visor',string.substring(0,40))
-//          return
-//        }
-//        const options = {encoding: 'iso88591'};
-//        const printer = new escpos.Screen(device, options);
-//        try {
-//          device.open(function() {
-//            printer
-            // Espacios en blanco para limpiar el visor y volver a mostrar los datos en el sitio correcto
-            // .text("")
-//                .clear()
-            // .moveUp()
-            // Información del artículo (artículo + precio)
-//                .text(datosExtra )
-//                .text(data.texto)
-            // .text(datosExtra)
-//                .close();
-//          });
-//        } catch (error) {
-//
-//        }
-//      } else {
-//          mqttlog.loggerMQTT('Controlado: dispositivo es null');
-//      }
-//    } catch (err) {
-//        mqttlog.loggerMQTT('Error2: '+ err);
-      // errorImpresora(err, event);
-//    }
-    //   mqttlog.loggerMQTT('El visor da muchos problemas');
+          return
+        }
+        const options = {encoding: 'iso88591'};
+        const printer = new escpos.Screen(device, options);
+
+        try {
+          device.open(function() {
+            printer
+                .clear()
+                .text(string.substring(0,40))
+                .close();
+          });
+        } catch (error) {
+
+        }
+      } else {
+          mqttlog.loggerMQTT('Controlado: dispositivo es null');
+      }
+    } catch (err) {
+        mqttlog.loggerMQTT('Error2: '+ err);
+//     errorImpresora(err, event);
+    }
+       mqttlog.loggerMQTT('El visor da muchos problemas');
   }
+
+
   async imprimirEntregas() {
     const params = parametrosInstance.getParametros();
     return axios.post('entregas/getEntregas', {database: params.database, licencia: params.licencia}).then(async (res: any) => {
