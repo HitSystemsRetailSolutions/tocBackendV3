@@ -114,7 +114,7 @@ export class Impresora {
     try {
       permisosImpresora();
       //   var device = new escpos.USB('0x67b','0x2303');
-      const device = await dispositivos.();
+      const device = await dispositivos.getDeviceVisor();
       if (device != null) {
 
         if(device === 'MQTT'){
