@@ -288,7 +288,7 @@ export class CestaClase {
       let encontrado = false;
       if (!infoArticulo.suplementos) {
         for (let i = 0; i < miCesta.lista.length; i++) {
-          if (miCesta.lista[i]._id === infoArticulo._id) {
+          if (miCesta.lista[i]._id === infoArticulo._id && infoAPeso==null) {
             var viejoIva = miCesta.tiposIva;
             if (infoAPeso == null) {
               miCesta.lista[i].unidades += unidades;
@@ -310,7 +310,7 @@ export class CestaClase {
           miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: unidades*infoArticulo.precioConIva});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva);
         } else {
-          miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
+          miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseInt(infoAPeso.peso), promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva, infoAPeso);
         }
       }
@@ -319,7 +319,8 @@ export class CestaClase {
         miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: unidades*infoArticulo.precioConIva});
         miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva);
       } else {
-        miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
+        miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseInt(infoAPeso.peso), promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
+        console.log("unidades en lista cesta", infoAPeso.peso);
         miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva, infoAPeso);
       }
     }
