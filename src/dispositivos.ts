@@ -4,12 +4,14 @@ const mqtt = new Mqtt();
 const escpos = require('escpos');
 const exec = require('child_process').exec;
 const os = require('os');
-escpos.USB = require('escpos-usb');
-escpos.Serial = require('escpos-serialport');
+//escpos.USB = require('escpos-usb');
+//escpos.Serial = require('escpos-serialport');
 escpos.Screen = require('escpos-screen');
 
 export class Dispositivos {
   async getDevice() {
+    return 'MQTT'
+/*
     const parametros = await parametrosInstance.getEspecialParametros();
     if (os.platform() === 'linux') {
       try {
@@ -55,11 +57,12 @@ export class Dispositivos {
         mqtt.loggerMQTT(err.message);
         return null;
       }
-    }
+    }*/
   }
 
   async getDeviceVisor() {
-    const parametros = await parametrosInstance.getEspecialParametros();
+    return 'MQTT'
+/*    const parametros = await parametrosInstance.getEspecialParametros();
     if (parametros.visor != undefined) {
       if(parametros.visor == 'MQTT'){
         return 'MQTT'
@@ -73,7 +76,7 @@ export class Dispositivos {
         }
       }
       return null;
-    }
+    }*/
   }
 }
 
