@@ -11,8 +11,10 @@ export class ImpresoraController {
   }
 
     @Post('abrirCajon')
-    abrirCajon() {
-      impresoraInstance.abrirCajon();
+    abrirCajon(@Body() params) {
+      console.log("params abrirCajon",params.precioTotal);
+      const precioTotal: number = params.precioTotal;
+      impresoraInstance.abrirCajon(precioTotal);
     }
 
     @Post('imprimirEntregas')

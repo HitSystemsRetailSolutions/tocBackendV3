@@ -698,7 +698,7 @@ export class Impresora {
     }
   }
 
-  async abrirCajon() {
+  async abrirCajon(data:number) {
     const parametros = parametrosInstance.getParametros();
     try {
       if (os.platform() === 'linux') {
@@ -726,7 +726,8 @@ export class Impresora {
         // }
         const device = await dispositivos.getDevice();
         const printer = new escpos.Printer(device);
-
+       
+        client.publish('hit.hardware/visor',"Moltes gracies! Total: "+data+"€");
         device.open(function() {
           printer
               .cashdraw(2)
@@ -756,7 +757,8 @@ export class Impresora {
         // }
         const device = await dispositivos.getDevice();
         const printer = new escpos.Printer(device);
-
+        
+        client.publish('hit.hardware/visor',"Moltes gracies! Total: "+data+"€");
         device.open(function() {
           printer
               .cashdraw(2)
