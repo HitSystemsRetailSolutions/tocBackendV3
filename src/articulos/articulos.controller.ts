@@ -4,6 +4,7 @@ import axios from 'axios';
 import {clienteInstance} from '../clientes/clientes.clase';
 import {articulosInstance} from './articulos.clase';
 import {Mqtt} from '../mqtt';
+// import {dobleMenusInstance} from '../doble-menus/doble-menus.clase';
 const mqtt = new Mqtt();
 @Controller('articulos')
 export class ArticulosController {
@@ -38,7 +39,9 @@ export class ArticulosController {
         // mqtt.loggerMQTT('Hola', params.idArticulo, params.nombre, params.precioBase, params.precioConIva)
         return articulosInstance.editarArticulo(params.idArticulo, params.nombre, params.precioBase, params.precioConIva).then((res) => {
           if (res) {
+            // dobleMenusInstance.clickMenu('1');
             return {error: false, info: res};
+          
           }
           return {error: true, mensaje: 'Backend: Error, faltan datos'};
         });
