@@ -729,12 +729,12 @@ export class Impresora {
 
         let dataString:string=data.toString();
 
-        let string="Moltes gracies! Total: "+dataString.replace(",",".")+"E";
-        let restar=string;
-        string+="                                       .";
-        
-        let lineasVisor:string=string.substring(0,string.length-restar.length);
-        
+        let linea1Visor="Moltes gracies!! Total: "+dataString.replace(",",".")+"E";
+        let restar=linea1Visor;
+        linea1Visor+="                    ";
+        let linea2Visor="                    ";
+        let lineasVisor:string=linea1Visor.substring(0,linea1Visor.length-restar.length)+linea2Visor;
+
         client.publish('hit.hardware/visor',lineasVisor);
         device.open(function() {
           printer
@@ -767,13 +767,13 @@ export class Impresora {
         const printer = new escpos.Printer(device);
         
         let dataString:string=data.toString();
+        let linea1Visor="Moltes gracies!! Total: "+dataString.replace(",",".")+"E";
+        let restar=linea1Visor;
+        linea1Visor+="                    ";
+        let linea2Visor="                    ";
+        let lineasVisor:string=linea1Visor.substring(0,linea1Visor.length-restar.length)+linea2Visor;
+        
 
-        let string="Moltes gracies! Total: "+dataString.replace(",",".")+"E";
-        let restar=string;
-        string+="                                       .";
-        
-        let lineasVisor:string=string.substring(0,string.length-restar.length);
-        
         client.publish('hit.hardware/visor',lineasVisor);
 
         device.open(function() {
