@@ -726,11 +726,16 @@ export class Impresora {
         // }
         const device = await dispositivos.getDevice();
         const printer = new escpos.Printer(device);
-        
+
         let dataString:string=data.toString();
+
         let string="Moltes gracies! Total: "+dataString.replace(",",".")+"E";
-       
-        client.publish('hit.hardware/visor',string);
+        let restar=string;
+        string+="                                       .";
+        
+        let lineasVisor:string=string.substring(0,string.length-restar.length);
+        
+        client.publish('hit.hardware/visor',lineasVisor);
         device.open(function() {
           printer
               .cashdraw(2)
@@ -764,8 +769,12 @@ export class Impresora {
         let dataString:string=data.toString();
 
         let string="Moltes gracies! Total: "+dataString.replace(",",".")+"E";
-
-        client.publish('hit.hardware/visor',string);
+        let restar=string;
+        string+="                                       .";
+        
+        let lineasVisor:string=string.substring(0,string.length-restar.length);
+        
+        client.publish('hit.hardware/visor',lineasVisor);
 
         device.open(function() {
           printer
