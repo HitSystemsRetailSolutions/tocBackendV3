@@ -30,6 +30,7 @@ export class MenusController {
     @Post('getMenus')
     getMenus() {
       return menusInstance.getMenus().then((resultado) => {
+console.log("menu",resultado);        
         if (menusInstance.getBloqueado() == false) {
           return {bloqueado: false, resultado: resultado};
         } else {

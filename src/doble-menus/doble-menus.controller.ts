@@ -30,7 +30,9 @@ export class DobleMenusController {
 
     @Post('getMenus')
     getMenus() {
+      
       return dobleMenusInstance.getMenus().then((resultado) => {
+        console.log("dpblemenu",dobleMenusInstance);
         if (!dobleMenusInstance.getBloqueado()) {
           return {bloqueado: false, resultado: resultado};
         } else {
