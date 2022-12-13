@@ -28,6 +28,67 @@ export async function getMonedas(tipo: 'APERTURA' | 'CLAUSURA') {
   const resultado = await caja.findOne({_id: tipo});
   return resultado;
 }
+export async function getCambioDeTurno() {
+  const database = (await conexion).db('tocgame');
+  const caja = database.collection('cambioDeTurno');
+
+  const resultado = await  caja.drop();
+  console.log(resultado);
+  return resultado;
+
+  
+}
+
+export async function getAnularTurno() {
+
+  const database = (await conexion).db('tocgame');
+  const caja = database.collection('cambioDeTurno');
+ 
+
+  const tiempoTranscurrido = new Date();
+  const fecha = tiempoTranscurrido.toLocaleDateString('es-ES');
+  const hora =tiempoTranscurrido.toLocaleTimeString('es-ES');
+  const resultado = await  caja.insertOne({"fecha":fecha,"hora":hora});
+  console.log(resultado);
+  // la linea de codigo de abajo iria en otra funcion para
+  // comprobar si el cambio de turno es de hoy o no:
+
+  // const fecha = tiempoTranscurrido.toLocaleDateString('es-ES');
+  // const buscar= await caja.findOne({fecha:fecha});
+  // console.log(buscar);
+ 
+  // if (buscar!=null) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+ 
+  return resultado;
+
+}
+
+export async function getComprovarTurno() {
+
+  const database = (await conexion).db('tocgame');
+  const caja = database.collection('cambioDeTurno');
+ 
+
+  const tiempoTranscurrido = new Date();
+ 
+  // la linea de codigo de abajo iria en otra funcion para
+  // comprobar si el cambio de turno es de hoy o no:
+
+  const fecha = tiempoTranscurrido.toLocaleDateString('es-ES');
+  const buscar= await caja.findOne({fecha:fecha});
+  console.log(buscar);
+ 
+  if (buscar!=null) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
 
 export async function getDatosUltimoCierre() {
   const database = (await conexion).db('tocgame');

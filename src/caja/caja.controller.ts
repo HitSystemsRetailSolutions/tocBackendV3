@@ -82,6 +82,55 @@ export class CajaController {
       });
     }
 
+    @Post('cambioTurno')
+    cambioTurno() { // No probado! Se le pasa solo el array de monedas
+      console.log("holahola");
+      // if (params.estado==true) {
+      //   return {msg:'cambioTurno recibido',estado:false};
+      // } else {
+      //   return {msg:'cambioTurno recibido',estado:true};
+      // }
+      return cajaInstance.getCambioDeTurno().then((res) => {
+        return { info: res};
+      }).catch((err) => {
+        mqtt.loggerMQTT(err);
+        return {error: true, mensaje: 'Backend: Error en caja/getCambioTurno > CATCH'};
+      });
+      
+    }
+    @Post('anularTurno')
+    anularTurno() { // No probado! Se le pasa solo el array de monedas
+      console.log("adiosadios");
+      // if (params.estado==true) {
+      //   return {msg:'cambioTurno recibido',estado:false};
+      // } else {
+      //   return {msg:'cambioTurno recibido',estado:true};
+      // }
+      return cajaInstance.getAnularTurno().then((res) => {
+        return { info: res};
+      }).catch((err) => {
+        mqtt.loggerMQTT(err);
+        return {error: true, mensaje: 'Backend: Error en caja/getAnularTurno > CATCH'};
+      });
+      
+    }
+    @Post('comprovarTurno')
+    comprovarTurno() { // No probado! Se le pasa solo el array de monedas
+      console.log("adiosadios");
+      // if (params.estado==true) {
+      //   return {msg:'cambioTurno recibido',estado:false};
+      // } else {
+      //   return {msg:'cambioTurno recibido',estado:true};
+      // }
+      return cajaInstance.getComprovarTurno().then((res) => {
+        return { estado: res};
+      }).catch((err) => {
+        mqtt.loggerMQTT(err);
+        return {error: true, mensaje: 'Backend: Error en caja/getAnularTurno > CATCH'};
+      });
+      
+    }
+
     @Post('getDatosUltimoCierre')
     getDatosUltimoCierre() { // No probado! Se le pasa solo el array de monedas
       return cajaInstance.getDatosUltimoCierre().then((res) => {

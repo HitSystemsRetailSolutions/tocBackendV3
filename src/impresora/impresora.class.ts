@@ -729,7 +729,7 @@ export class Impresora {
 
         let dataString:string=data.toString();
 
-        let linea1Visor="Moltes gracies!! Total: "+dataString.replace(",",".")+"E";
+        let linea1Visor="Moltes gracies!!    "+"Total: "+dataString.replace(",",".")+"E";
         let restar=linea1Visor;
         linea1Visor+="                                        ";
         
@@ -767,7 +767,7 @@ export class Impresora {
         const printer = new escpos.Printer(device);
         
         let dataString:string=data.toString();
-        let linea1Visor="Moltes gracies!! Total: "+dataString.replace(",",".")+"E";
+        let linea1Visor="Moltes gracies!!    "+"Total: "+dataString.replace(",",".")+"E";
         let restar=linea1Visor;
         linea1Visor+="                                        ";
         
