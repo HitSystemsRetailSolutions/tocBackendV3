@@ -144,6 +144,7 @@ export class CajaClase {
   }
   getComprovarTurno(){
     return schCajas.getComprovarTurno().then((res) => {
+      console.log("time en caja.clase: ", res.time);
       return res;
     }).catch((err) => {
       mqtt.loggerMQTT(err);
@@ -226,7 +227,7 @@ export class CajaClase {
       mqtt.loggerMQTT(err);
     }
   }
-
+  
   async cerrarCaja(total: number, detalleCierre, guardarInfoMonedas, totalDatafono3G: number) { // Promise<boolean> {
     await this.antiTicketsNoCobrados();
     const estaAbierta = await this.cajaAbierta();
@@ -235,7 +236,7 @@ export class CajaClase {
       let cajaActual: CajaInterface = await this.getInfoCaja();
       cajaActual.totalCierre = total;
       cajaActual.detalleCierre = detalleCierre;
-      cajaActual.finalTime = Date.now();
+      cajaActual.finalTime = await this.getFechaCierre();
       cajaActual.idDependienta = await trabajadoresInstance.getCurrentIdTrabajador(); // this.getCurrentTrabajador()._id;
       cajaActual.totalDatafono3G = totalDatafono3G;
       cajaActual.totalClearOne = 0;
@@ -277,7 +278,17 @@ export class CajaClase {
       return false;
     }
   }
-
+  getFechaCierre(){
+    return schCajas.getComprovarTurno().then((res) => {
+      console.log("time en caja.clase: ", res.time);
+      if (res.estado==true) {
+        return res.time
+      } else {
+       return Date.now();
+      }
+      
+    })
+  }
   borrarCaja() {
     return schCajas.borrarCaja().then((result) => {
       if (result) {

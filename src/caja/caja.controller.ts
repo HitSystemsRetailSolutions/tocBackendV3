@@ -123,7 +123,7 @@ export class CajaController {
       //   return {msg:'cambioTurno recibido',estado:true};
       // }
       return cajaInstance.getComprovarTurno().then((res) => {
-        return { estado: res};
+        return { info: res};
       }).catch((err) => {
         mqtt.loggerMQTT(err);
         return {error: true, mensaje: 'Backend: Error en caja/getAnularTurno > CATCH'};
