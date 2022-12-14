@@ -3,14 +3,18 @@ services:
   tocgame:
     container_name: Backend
     image: tocgame:22.47
+    environment:
+      MONGO_URL: "mongodb://mongodb:27017"
+    depends_on:
+      - mongodb
+    ports:
+     - 3000:3000
+    restart: unless-stopped
   mongodb:
     container_name: mongodb
-    environment:
-     - PUID=1000
-     - PGID=1000
-    volumes:
-     - /home/barry/mongodb/database:/data/db
     image: mongo:latest
+    volumes:
+     - ~/mongo/data:/data/db
     ports:
      - 27017:27017
     restart: unless-stopped
