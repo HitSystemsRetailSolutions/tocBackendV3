@@ -282,6 +282,7 @@ export class CajaClase {
     return schCajas.getComprovarTurno().then((res) => {
       console.log("time en caja.clase: ", res.time);
       if (res.estado==true) {
+        schCajas.getCambioDeTurno().then((res2) => {});
         return res.time
       } else {
        return Date.now();
