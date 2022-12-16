@@ -123,6 +123,34 @@ export class CajaClase {
       return null;
     });
   }
+  getCambioDeTurno(){
+    return schCajas.getCambioDeTurno().then((res) => {
+      return res;
+    }).catch((err) => {
+      mqtt.loggerMQTT(err);
+      return null;
+    });
+    
+  }
+
+  getAnularTurno(){
+    return schCajas.getAnularTurno().then((res) => {
+      return res;
+    }).catch((err) => {
+      mqtt.loggerMQTT(err);
+      return null;
+    });
+    
+  }
+  getComprovarTurno(){
+    return schCajas.getComprovarTurno().then((res) => {
+      return res;
+    }).catch((err) => {
+      mqtt.loggerMQTT(err);
+      return null;
+    });
+    
+  }
 
   getDatosUltimoCierre() {
     return schCajas.getDatosUltimoCierre().then((res) => {
