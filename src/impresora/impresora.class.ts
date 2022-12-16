@@ -110,7 +110,8 @@ export class Impresora {
       // errorImpresora(err, event);
     }
   }
-  async despedircliente() {
+  async despedircliente(data:number) {
+    console.log(data);
     try {
       permisosImpresora();
       //   var device = new escpos.USB('0x67b','0x2303');
@@ -118,7 +119,14 @@ export class Impresora {
       if (device != null) {
 
         if(device === 'MQTT'){
-          client.publish('hit.hardware/visor','Moltes Gracies !!                       ')
+          let dataString:string=data.toString();
+        let linea1Visor="Moltes gracies!!    "+"Total: "+dataString.replace(",",".")+"E";
+        let restar=linea1Visor;
+        linea1Visor+="                                        ";
+        
+        let lineasVisor:string=linea1Visor.substring(0,linea1Visor.length-restar.length);
+        console.log(lineasVisor.length,lineasVisor);
+        client.publish('hit.hardware/visor',lineasVisor);
           return
         }
         const options = {encoding: 'iso88591'};

@@ -28,8 +28,8 @@ export class ImpresoraController {
     }
     
     @Post('despedida')
-    despedircliente() {
-      impresoraInstance.despedircliente();
+    despedircliente(@Body() params) {
+      impresoraInstance.despedircliente(params.precioTotal);
     }
     @Post('bienvenida')
     binvenidacliente() {
