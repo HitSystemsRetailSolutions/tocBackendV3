@@ -236,7 +236,7 @@ export class CajaClase {
       let cajaActual: CajaInterface = await this.getInfoCaja();
       cajaActual.totalCierre = total;
       cajaActual.detalleCierre = detalleCierre;
-      cajaActual.finalTime = Date.now();
+      cajaActual.finalTime = await this.getFechaCierre();
       cajaActual.idDependienta = await trabajadoresInstance.getCurrentIdTrabajador(); // this.getCurrentTrabajador()._id;
       cajaActual.totalDatafono3G = totalDatafono3G;
       cajaActual.totalClearOne = 0;
@@ -278,7 +278,18 @@ export class CajaClase {
       return false;
     }
   }
-
+  getFechaCierre(){
+    return schCajas.getComprovarTurno().then((res) => {
+      console.log("time en caja.clase: ", res.time);
+      if (res.estado==true) {
+	schCajas.getCambioDeTurno().then((res2) => {});
+        return res.time
+      } else {
+       return Date.now();
+      }
+      
+    })
+  }
   borrarCaja() {
     return schCajas.borrarCaja().then((result) => {
       if (result) {
