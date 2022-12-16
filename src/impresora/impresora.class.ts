@@ -683,7 +683,7 @@ export class Impresora {
     }
   }
 
-  async abrirCajon() {
+  async abrirCajon(data:number) {
     const parametros = parametrosInstance.getParametros();
     try {
       if (os.platform() === 'linux') {
@@ -712,6 +712,15 @@ export class Impresora {
         const device = await dispositivos.getDevice();
         const printer = new escpos.Printer(device);
 
+        let dataString:string=data.toString();
+
+        let linea1Visor="Moltes gracies!!    "+"Total: "+dataString.replace(",",".")+"E";
+        let restar=linea1Visor;
+        linea1Visor+="                                        ";
+        
+        let lineasVisor:string=linea1Visor.substring(0,linea1Visor.length-restar.length);
+        
+        client.publish('hit.hardware/visor',lineasVisor);
         device.open(function() {
           printer
               .cashdraw(2)
@@ -741,6 +750,15 @@ export class Impresora {
         // }
         const device = await dispositivos.getDevice();
         const printer = new escpos.Printer(device);
+        
+        let dataString:string=data.toString();
+        let linea1Visor="Moltes gracies!!    "+"Total: "+dataString.replace(",",".")+"E";
+        let restar=linea1Visor;
+        linea1Visor+="                                        ";
+        
+        let lineasVisor:string=linea1Visor.substring(0,linea1Visor.length-restar.length);
+        console.log(lineasVisor.length,lineasVisor);
+        client.publish('hit.hardware/visor',lineasVisor);
 
         device.open(function() {
           printer

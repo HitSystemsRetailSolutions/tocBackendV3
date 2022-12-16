@@ -11,8 +11,8 @@ export class ImpresoraController {
   }
 
     @Post('abrirCajon')
-    abrirCajon() {
-      impresoraInstance.abrirCajon();
+    abrirCajon(@Body() params) {
+      impresoraInstance.abrirCajon(params.precioTotal);
     }
 
     @Post('imprimirEntregas')
