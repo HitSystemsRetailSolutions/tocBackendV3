@@ -83,10 +83,10 @@ export class CajaClase {
       return false;
     });
   }
-
-  abrirCaja(infoApertura: any): Promise<boolean> {
+  
+   async abrirCaja(infoApertura: any): Promise<boolean> {
     const cajaNueva = cajaVacia;
-    cajaNueva.inicioTime = Date.now();
+    cajaNueva.inicioTime = await this.getComprovarFechaCierreTurno();
     cajaNueva.detalleApertura = infoApertura.detalle;
     cajaNueva.totalApertura = infoApertura.total;
 
@@ -102,6 +102,18 @@ export class CajaClase {
     });
   }
 
+  getComprovarFechaCierreTurno(){
+    return schCajas.getComprovarTurno().then((res) => {
+      console.log("time en caja.clase: ", res.time);
+      if (res.estado==true) {
+	schCajas.getCambioDeTurno().then((res2) => {});
+        return parseInt(res.time);
+      } else {
+       return Date.now();
+      }
+      
+    })
+  }
   guardarMonedas(arrayMonedas: any, tipo: 'APERTURA' | 'CLAUSURA') {
     return schCajas.guardarMonedas(arrayMonedas, tipo).then((res) => {
       return res.acknowledged;
@@ -282,7 +294,7 @@ export class CajaClase {
     return schCajas.getComprovarTurno().then((res) => {
       console.log("time en caja.clase: ", res.time);
       if (res.estado==true) {
-	schCajas.getCambioDeTurno().then((res2) => {});
+	
         return res.time
       } else {
        return Date.now();
@@ -290,6 +302,7 @@ export class CajaClase {
       
     })
   }
+  
   borrarCaja() {
     return schCajas.borrarCaja().then((result) => {
       if (result) {
