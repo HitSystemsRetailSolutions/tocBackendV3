@@ -104,12 +104,18 @@ export class CestaClase {
         base1: 0,
         base2: 0,
         base3: 0,
+        base4: 0,
+        base5: 0,
         valorIva1: 0,
         valorIva2: 0,
         valorIva3: 0,
+        valorIva4: 0,
+        valorIva5: 0,
         importe1: 0,
         importe2: 0,
         importe3: 0,
+        importe4: 0,
+        importe5: 0,
       },
       lista: [],
       nombreCesta: 'PRINCIPAL',
@@ -309,6 +315,7 @@ export class CestaClase {
         if (infoAPeso == null) {
           miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: unidades*infoArticulo.precioConIva});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva);
+          console.log(miCesta);
         } else {
           miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseFloat(infoAPeso.peso)/1000, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva, infoAPeso);
@@ -339,15 +346,18 @@ export class CestaClase {
           infoArticulo = await articulosInstance.getInfoArticulo(idArticulo);
           if (infoArticulo) { // AQUI PENSAR ALGUNA COMPROBACIÓN CUANDO NO EXISTA O FALLE ESTE GET
             if (infoArticulo.suplementos) {
+              console.log("este articulo tiene suplementos");
               await this.insertarArticuloCesta(infoArticulo, unidades, idCesta);
               return {
                 suplementos: true,
                 data: await articulosInstance.getSuplementos(infoArticulo.suplementos),
               };
             } else {
+              console.log("este articulo  no tiene suplementos");
               cestaRetornar = await this.insertarArticuloCesta(infoArticulo, unidades, idCesta);
             }
           } else {
+            console.log("este articulo tiene errores");
 
             // vueToast.abrir('error', 'Este artículo tiene errores');
           }
@@ -402,12 +412,18 @@ export class CestaClase {
       base1: 0,
       base2: 0,
       base3: 0,
+      base4: 0,
+      base5: 0,
       valorIva1: 0,
       valorIva2: 0,
       valorIva3: 0,
+      valorIva4: 0,
+      valorIva5: 0,
       importe1: 0,
       importe2: 0,
       importe3: 0,
+      importe4: 0,
+      importe5: 0,
     };
     for (let i = 0; i < cesta.lista.length; i++) {
       if (cesta.lista[i].promocion.esPromo === false) {
