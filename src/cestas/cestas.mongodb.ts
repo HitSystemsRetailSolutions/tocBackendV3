@@ -75,14 +75,20 @@ export async function borrarCesta(idCesta: number) {
   const cesta = database.collection('cestas');
   const tiposIva = {
     base1: 0,
-    base2: 0,
-    base3: 0,
-    valorIva1: 0,
-    valorIva2: 0,
-    valorIva3: 0,
-    importe1: 0,
-    importe2: 0,
-    importe3: 0,
+        base2: 0,
+        base3: 0,
+        base4: 0,
+        base5: 0,
+        valorIva1: 0,
+        valorIva2: 0,
+        valorIva3: 0,
+        valorIva4: 0,
+        valorIva5: 0,
+        importe1: 0,
+        importe2: 0,
+        importe3: 0,
+        importe4: 0,
+        importe5: 0,
   };
   const resultado = await cesta.updateOne({_id: idCesta}, {$set: {'lista': [], 'tiposIva': tiposIva}}, {upsert: true});
   return resultado;
