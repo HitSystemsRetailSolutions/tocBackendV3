@@ -347,7 +347,7 @@ export class Impresora {
         pagoDevolucion = '-- ES DEVOLUCION --\n';
       }
       let str1= '            ';
-      let str2= '              ';
+      let str2= '                  ';
       let str3= '              ';
       let base = '';
       let valorIva = '';
@@ -365,25 +365,25 @@ export class Impresora {
         detalleIva4 = str1.substring(0,str1.length-base.length)+base+str2.substring(0,str2.length-valorIva.length)+valorIva+str3.substring(0,str3.length-importe.length)+importe;
       }
       if (tiposIva.importe2 > 0) {
-        base=tiposIva.base1.toFixed(2)+'€';
+        base=tiposIva.base2.toFixed(2)+'€';
         valorIva='10%: '+tiposIva.valorIva1.toFixed(2)+'€';
         importe=tiposIva.importe1.toFixed(2)+'€\n';
         detalleIva10 = str1.substring(0,str1.length-base.length)+base+str2.substring(0,str2.length-valorIva.length)+valorIva+str3.substring(0,str3.length-importe.length)+importe;
       }
       if (tiposIva.importe3 > 0) {
-        base=tiposIva.base1.toFixed(2)+'€';
+        base=tiposIva.base3.toFixed(2)+'€';
         valorIva='21%: '+tiposIva.valorIva1.toFixed(2)+'€';
         importe=tiposIva.importe1.toFixed(2)+'€\n';
         detalleIva21 = str1.substring(0,str1.length-base.length)+base+str2.substring(0,str2.length-valorIva.length)+valorIva+str3.substring(0,str3.length-importe.length)+importe;
       }
       if (tiposIva.importe4 > 0) {
-        base=tiposIva.base1.toFixed(2)+'€';
+        base=tiposIva.base4.toFixed(2)+'€';
         valorIva='0%: '+tiposIva.valorIva1.toFixed(2)+'€';
         importe=tiposIva.importe1.toFixed(2)+'€\n';
         detalleIva0 = str1.substring(0,str1.length-base.length)+base+str2.substring(0,str2.length-valorIva.length)+valorIva+str3.substring(0,str3.length-importe.length)+importe;
       }
       if (tiposIva.importe5 > 0) {
-        base=tiposIva.base1.toFixed(2)+'€';
+        base=tiposIva.base5.toFixed(2)+'€';
         valorIva='5%: '+tiposIva.valorIva1.toFixed(2)+'€';
         importe=tiposIva.importe1.toFixed(2)+'€\n';
         detalleIva5 = str1.substring(0,str1.length-base.length)+base+str2.substring(0,str2.length-valorIva.length)+valorIva+str3.substring(0,str3.length-importe.length)+importe;
