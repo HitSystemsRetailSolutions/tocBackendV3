@@ -364,10 +364,10 @@ export class Impresora {
         detalleIva21 = `${tiposIva.base3.toFixed(2)}€     21%: ${tiposIva.valorIva3.toFixed(2)}€     ${tiposIva.importe3.toFixed(2)}€\n`;
       }
       if (tiposIva.importe4 > 0) {
-        detalleIva0 = `${tiposIva.base4.toFixed(2)}€     21%: ${tiposIva.valorIva4.toFixed(2)}€     ${tiposIva.importe4.toFixed(2)}€\n`;
+        detalleIva0 = `${tiposIva.base4.toFixed(2)}€     0%: ${tiposIva.valorIva4.toFixed(2)}€     ${tiposIva.importe4.toFixed(2)}€\n`;
       }
       if (tiposIva.importe5 > 0) {
-        detalleIva5 = `${tiposIva.base5.toFixed(2)}€     21%: ${tiposIva.valorIva5.toFixed(2)}€     ${tiposIva.importe5.toFixed(2)}€\n`;
+        detalleIva5 = `${tiposIva.base5.toFixed(2)}€     5%: ${tiposIva.valorIva5.toFixed(2)}€     ${tiposIva.importe5.toFixed(2)}€\n`;
       }
       detalleIva = detalleIva0 + detalleIva4 + detalleIva5 + detalleIva10 + detalleIva21;
       let infoConsumoPersonal = '';
