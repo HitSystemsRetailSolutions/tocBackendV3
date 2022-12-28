@@ -352,6 +352,8 @@ export class Impresora {
       let detalleIva10 = '';
       let detalleIva21 = '';
       let detalleIva = '';
+      let detalleIva0 = '';
+      let detalleIva5 = '';
       if (tiposIva.importe1 > 0) {
         detalleIva4 = `${tiposIva.base1.toFixed(2)}€      4%: ${tiposIva.valorIva1.toFixed(2)}€     ${tiposIva.importe1.toFixed(2)}€\n`;
       }
@@ -361,7 +363,13 @@ export class Impresora {
       if (tiposIva.importe3 > 0) {
         detalleIva21 = `${tiposIva.base3.toFixed(2)}€     21%: ${tiposIva.valorIva3.toFixed(2)}€     ${tiposIva.importe3.toFixed(2)}€\n`;
       }
-      detalleIva = detalleIva4 + detalleIva10 + detalleIva21;
+      if (tiposIva.importe4 > 0) {
+        detalleIva0 = `${tiposIva.base4.toFixed(2)}€     21%: ${tiposIva.valorIva4.toFixed(2)}€     ${tiposIva.importe4.toFixed(2)}€\n`;
+      }
+      if (tiposIva.importe5 > 0) {
+        detalleIva5 = `${tiposIva.base5.toFixed(2)}€     21%: ${tiposIva.valorIva5.toFixed(2)}€     ${tiposIva.importe5.toFixed(2)}€\n`;
+      }
+      detalleIva = detalleIva0 + detalleIva4 + detalleIva5 + detalleIva10 + detalleIva21;
       let infoConsumoPersonal = '';
       if (tipoPago == 'CONSUMO_PERSONAL') {
         infoConsumoPersonal = '---------------- Dte. 100% --------------';
