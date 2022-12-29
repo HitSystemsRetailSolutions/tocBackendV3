@@ -379,7 +379,7 @@ export class CestaClase {
               try {
                 impresoraInstance.mostrarVisor({
                   dependienta: data.nombre,
-                  total: (cestaRetornar.tiposIva.importe1 + cestaRetornar.tiposIva.importe2 + cestaRetornar.tiposIva.importe3).toFixed(2),
+                  total: (cestaRetornar.tiposIva.importe1 + cestaRetornar.tiposIva.importe2 + cestaRetornar.tiposIva.importe3 + cestaRetornar.tiposIva.importe4 + cestaRetornar.tiposIva.importe5).toFixed(2),
                   precio: infoArticulo.precioConIva.toString(),
                   texto: infoArticulo.nombre,
                   numProductos:numProductos,
@@ -454,7 +454,7 @@ export class CestaClase {
           try {
             impresoraInstance.mostrarVisor({
               dependienta: data.nombre,
-              total: (cesta.tiposIva.importe1 + cesta.tiposIva.importe2 + cesta.tiposIva.importe3).toFixed(2),
+              total: (cesta.tiposIva.importe1 + cesta.tiposIva.importe2 + cesta.tiposIva.importe3 + cesta.tiposIva.importe4 + cesta.tiposIva.importe5).toFixed(2),
               precio: infoArticulo.precioConIva.toString(),
               texto: infoArticulo.nombre,
               numProductos: numProductos,
