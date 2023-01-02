@@ -28,13 +28,13 @@ export function construirObjetoIvas(infoArticulo: ArticulosInterface, unidades, 
 
   let valor1 = 0; let valor2 = 0; let valor3 = 0; let valor4 = 0; let valor5 = 0;
   let importe1 = 0; let importe2 = 0; let importe3 = 0; let importe4 = 0; let importe5 = 0;
-console.log(infoArticulo.tipoIva);
+console.log("tipoIvas: ",infoArticulo.tipoIva);
   if (infoAPeso == null) {
     switch (infoArticulo.tipoIva) {
       case 1: base1 = (infoArticulo.precioConIva / 1.04) * unidades; valor1 = (infoArticulo.precioConIva / 1.04) * 0.04 * unidades; importe1 = infoArticulo.precioConIva * unidades; break;
       case 2: base2 = (infoArticulo.precioConIva / 1.10) * unidades; valor2 = (infoArticulo.precioConIva / 1.10) * 0.10 * unidades; importe2 = infoArticulo.precioConIva * unidades; break;
       case 3: base3 = (infoArticulo.precioConIva / 1.21) * unidades; valor3 = (infoArticulo.precioConIva / 1.21) * 0.21 * unidades; importe3 = infoArticulo.precioConIva * unidades; break;
-      case 4: base4 = (infoArticulo.precioConIva / 1) * unidades; valor4 = (infoArticulo.precioConIva / 1.00) * 0 * unidades; importe4 = infoArticulo.precioConIva * unidades; break;
+      case 4: base4 = (infoArticulo.precioConIva / 1) * unidades; valor4 = (infoArticulo.precioConIva / 1) * 0 * unidades; importe4 = infoArticulo.precioConIva * unidades; break;
       case 5: base5 = (infoArticulo.precioConIva / 1.05) * unidades; valor5 = (infoArticulo.precioConIva / 1.05) * 0.05 * unidades; importe5 = infoArticulo.precioConIva * unidades; break;
       default: break;
     }
@@ -43,8 +43,8 @@ console.log(infoArticulo.tipoIva);
       case 1: base1 = (infoAPeso.precioAplicado / 1.04) * unidades; valor1 = (infoAPeso.precioAplicado / 1.04) * 0.04 * unidades; importe1 = infoAPeso.precioAplicado * unidades; break;
       case 2: base2 = (infoAPeso.precioAplicado / 1.10) * unidades; valor2 = (infoAPeso.precioAplicado / 1.10) * 0.10 * unidades; importe2 = infoAPeso.precioAplicado * unidades; break;
       case 3: base3 = (infoAPeso.precioAplicado / 1.21) * unidades; valor3 = (infoAPeso.precioAplicado / 1.21) * 0.21 * unidades; importe3 = infoAPeso.precioAplicado * unidades; break;
-      case 4: base4 = (infoArticulo.precioConIva / 1) * unidades; valor4 = (infoArticulo.precioConIva / 1)  * 0 * unidades; importe4 = infoArticulo.precioConIva * unidades; break;
-      case 5: base5 = (infoArticulo.precioConIva / 1.05) * unidades; valor5 = (infoArticulo.precioConIva / 1.05) * 0.05 * unidades; importe5 = infoArticulo.precioConIva * unidades; break;
+      case 4: base4 = (infoAPeso.precioAplicado / 1) * unidades; valor4 = (infoAPeso.precioAplicado / 1)  * 0 * unidades; importe4 = infoAPeso.precioAplicado * unidades; break;
+      case 5: base5 = (infoAPeso.precioAplicado / 1.05) * unidades; valor5 = (infoAPeso.precioAplicado / 1.05) * 0.05 * unidades; importe5 = infoAPeso.precioAplicado * unidades; break;
       default: break;
     }
   }
@@ -65,7 +65,7 @@ console.log(infoArticulo.tipoIva);
     importe4: redondearPrecio(importe4 + tipoIvaAnterior.importe4),
     importe5: redondearPrecio(importe5 + tipoIvaAnterior.importe5),
   };
-
+  
   return aux;
 }
 export function convertirPuntosEnDinero(puntos: number): number {

@@ -315,7 +315,7 @@ export class CestaClase {
         if (infoAPeso == null) {
           miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: unidades*infoArticulo.precioConIva});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva);
-          console.log(miCesta);
+          
         } else {
           miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseFloat(infoAPeso.peso)/1000, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
           miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva, infoAPeso);
@@ -326,7 +326,7 @@ export class CestaClase {
         miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: unidades, promocion: {esPromo: false, _id: null}, subtotal: unidades*infoArticulo.precioConIva});
         miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva);
       } else {
-        miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseFloat(infoAPeso.peso)/100, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
+        miCesta.lista.push({_id: infoArticulo._id, nombre: infoArticulo.nombre, unidades: parseFloat(infoAPeso.peso)/1000, promocion: {esPromo: false, _id: null}, subtotal: infoAPeso.precioAplicado});
         console.log("unidades en lista cesta", infoAPeso.peso);
         miCesta.tiposIva = construirObjetoIvas(infoArticulo, unidades, miCesta.tiposIva, infoAPeso);
       }
